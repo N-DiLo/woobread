@@ -1,6 +1,6 @@
 import 'main_export.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized;
+void main() async {
+  await woobreadSetup();
   runApp(const ProviderScope(child: WoobReadApp()));
 }

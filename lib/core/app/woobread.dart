@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:woobread/core/core.dart';
+import 'package:woobread/main_export.dart';
 
 class WoobReadApp extends StatelessWidget {
   const WoobReadApp({super.key});
@@ -8,10 +8,18 @@ class WoobReadApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: kDebugMode,
+      onGenerateRoute: onGenerateRoute,
+      navigatorKey: navService.navKey,
+      initialRoute: RouteService.splash,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Manrope',
+        scaffoldBackgroundColor: AppColors.backgroundColor,
+        primaryColor: AppColors.primaryColor,
       ),
-      initialRoute: '/',
+      builder: (context, child) {
+        Vize.init(context, figmaHeight: 844, figmaWidth: 390);
+        return child!;
+      },
     );
   }
 }
