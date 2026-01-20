@@ -17,6 +17,8 @@ class RouteService {
   static const String signUp = 'sign-up';
   static const String signIn = 'sign-in';
   static const String forgotPswd = 'forgot-pswd';
+  static const String carouselIntro = 'carousel-intro';
+  static const String getStarted = 'get-started';
 
   // Random generator
   static final Random _random = Random();
@@ -35,6 +37,10 @@ class RouteService {
         return const ForgotPasswordView();
       case onboard:
         return const OnboardView();
+      case carouselIntro:
+        return const CarouselIntroView();
+      case getStarted:
+        return const GetStartedView();
       default:
         return Scaffold(
           body: Center(child: Text('No route defined for $route')),

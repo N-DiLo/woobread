@@ -50,11 +50,55 @@ class _OnboardViewState extends ConsumerState<OnboardView> {
             ),
             32.fhs,
             if (state.currentIndex > 0)
-              AppButton(
-                onTap: _handleNext,
-                text: 'Next',
-                enabled: true,
-                borderRadius: BorderRadius.circular(24.r),
+              Padding(
+                padding: ps(h: 16.r),
+                child: AppButton(
+                  onTap: _handleNext,
+                  text: state.currentIndex == state.items.length - 1
+                      ? 'Sign Up'
+                      : 'Next',
+                  enabled: true,
+                  borderRadius: BorderRadius.circular(24.r),
+                ),
+              ),
+
+            if (state.currentIndex > 1)
+              Column(
+                children: [
+                  12.fhs,
+                  Padding(
+                    padding: ps(h: 16.r),
+                    child: Column(
+                      children: [
+                        AppButton(
+                          text: 'Login',
+                          enabled: true,
+                          type: ButtonType.secondary,
+                          borderRadius: BorderRadius.circular(24.r),
+                          onTap: () => navService.pushReplacementNamed(
+                            RouteService.signIn,
+                          ),
+                        ),
+                        24.fhs,
+                        TextWidget(
+                          text: 'Continue as Guest',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        127.fhs,
+                        TextWidget(
+                          textAlign: TextAlign.center,
+                          softWrap: true,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          textColor: AppColors.lightGreenText,
+                          text:
+                              'By continuing, you agree to our Terms of Service and Privacy Policy.',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
           ],
         ),
@@ -70,7 +114,7 @@ class _OnboardViewState extends ConsumerState<OnboardView> {
         curve: Curves.easeInOut,
       );
     } else {
-      navService.pushReplacementNamed(RouteService.signUp);
+      navService.pushReplacementNamed(RouteService.carouselIntro);
     }
   }
 

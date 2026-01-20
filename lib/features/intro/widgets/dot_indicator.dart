@@ -3,12 +3,16 @@ import 'package:woobread/main_export.dart';
 class DotIndicator extends StatelessWidget {
   const DotIndicator({
     super.key,
+    this.activeColor,
+    this.inactiveColor,
     required this.count,
     required this.currentIndex,
   });
 
   final int count;
   final int currentIndex;
+  final Color? activeColor;
+  final Color? inactiveColor;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +32,8 @@ class DotIndicator extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: currentIndex == i
-                  ? AppColors.primaryColor
-                  : AppColors.inactiveDotColor,
+                  ? activeColor ?? AppColors.primaryColor
+                  : inactiveColor ?? AppColors.inactiveDotColor,
             ),
           ),
         ),

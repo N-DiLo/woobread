@@ -25,7 +25,10 @@ class _SignUpViewState extends State<SignUpView> {
     return Scaffold(
       appBar: CustomAppBar(
         centerTitle: true,
-        leading: Icon(Icons.close_rounded, color: AppColors.whiteColor),
+        leading: GestureDetector(
+          onTap: () => navService.pop(),
+          child: Icon(Icons.close_rounded, color: AppColors.whiteColor),
+        ),
         title: 'Sign Up',
       ),
 
