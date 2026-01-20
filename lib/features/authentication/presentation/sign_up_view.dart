@@ -43,6 +43,7 @@ class _SignUpViewState extends State<SignUpView> {
               controller: emailcontroller,
             ),
             AppTextfield(
+              obscureText: true,
               hintText: 'Password',
               controller: pswdcontroller,
               validator: (pswd) => Validators.isValidPassword(pswd),
