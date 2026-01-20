@@ -34,7 +34,8 @@ class _OnboardViewState extends ConsumerState<OnboardView> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
+            SizedBox(
+              height: _getPageHeight(state.currentIndex),
               child: PageView.builder(
                 pageSnapping: true,
                 controller: _pageCtrl,
@@ -43,50 +44,41 @@ class _OnboardViewState extends ConsumerState<OnboardView> {
                 itemBuilder: (ctx, i) => OnboardItems(index: i),
               ),
             ),
-            Padding(
-              padding: po(l: 171.r, r: 211.r),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: List.generate(
-                      state.items.length,
-                      (i) => Container(
-                        margin: 3.pa,
-                        width: state.currentIndex == i ? 12.r : 12.r,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: state.currentIndex == i
-                              ? AppColors.primaryColor
-                              : AppColors.inactiveDotColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            DotIndicator(
+              count: state.items.length,
+              currentIndex: state.currentIndex,
             ),
             32.fhs,
-            AppButton(
-              onTap: () {
-                if (state.currentIndex < state.items.length - 1) {
-                  _pageCtrl.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
-                } else {
-                  navService.pushReplacementNamed(RouteService.signUp);
-                }
-              },
-              text: 'Next',
-              enabled: true,
-              borderRadius: BorderRadius.circular(24.r),
-            ),
+            if (state.currentIndex > 0)
+              AppButton(
+                onTap: _handleNext,
+                text: 'Next',
+                enabled: true,
+                borderRadius: BorderRadius.circular(24.r),
+              ),
           ],
         ),
       ),
     );
+  }
+
+  void _handleNext() {
+    final state = ref.read(onboardProvider);
+    if (state.currentIndex < state.items.length - 1) {
+      _pageCtrl.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      navService.pushReplacementNamed(RouteService.signUp);
+    }
+  }
+
+  double _getPageHeight(int index) {
+    return switch (index) {
+      0 => 43.h,
+      1 => 50.h,
+      _ => 55.h,
+    };
   }
 }

@@ -25,22 +25,25 @@ class OnboardItems extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               20.fhs,
-              TextWidget(
-                text: model.title,
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                textColor: AppColors.whiteColor,
-              ),
+              state.currentIndex == 0
+                  ? SizedBox.shrink()
+                  : TextWidget(
+                      text: model.title,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      textColor: AppColors.whiteColor,
+                    ),
               16.fhs,
-              if (model.subTitle.isNotEmpty)
-                TextWidget(
-                  textAlign: TextAlign.center,
-                  text: model.subTitle,
-                  softWrap: true,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  textColor: AppColors.whiteColor,
-                ),
+              state.currentIndex == 0
+                  ? SizedBox.shrink()
+                  : TextWidget(
+                      textAlign: TextAlign.center,
+                      text: model.subTitle,
+                      softWrap: true,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      textColor: AppColors.whiteColor,
+                    ),
             ],
           ),
         ),
